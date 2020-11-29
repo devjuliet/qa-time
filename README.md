@@ -1,1 +1,3 @@
-# qa-time
+# QA Time
+
+by Julieta Navarro
