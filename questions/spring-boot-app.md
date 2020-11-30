@@ -69,7 +69,7 @@ The most important part comes next, since we are going to create the context.
 Following the next steps:
 1. Application Context is started.
 2. Using application context autodiscovery occurs: @ComponentScan
-3. All default configurations are set up ie based on dependencies.
+3. All default configurations are set up based on dependencies.
 4. An embedded servlet container is started. 
 
  ```java
@@ -114,4 +114,7 @@ listeners.started(context);
 callRunners(context, applicationArguments);
 ```
 
-Finally, we return the context.
+Finally, we return the contex to the Application.
+```java
+return context
+```
