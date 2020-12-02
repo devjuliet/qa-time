@@ -47,4 +47,9 @@ enqueueSetState: function(
     warnNoop(publicInstance, 'setState');
   }
 ```
+TODO
+# What are recieveProps and shouldComponentUpdate?
 
+# Why does enqueueSetState receive many arguments but only uses one on its body? What happens with the callback?
+
+# What does warnNoop do?
