@@ -6,7 +6,7 @@ accessing `this.state` after calling this method may return the old value.
  
 There is no guarantee that calls to `setState` will run synchronously, as they may eventually be batched together.  You can provide an optional callback that will be executed when the call to setState is actually completed.
 
-When a function is provided to `setState`, it will be called at some point in the future (not synchronously). It will be called with the arguments (state, props, context). These values can be different from this because the function may be called after receiveProps but before `shouldComponentUpdate`, and this new state, props, and context will not yet be assigned to this.
+When a function is provided to `setState`, it will be called at some point in the future (not synchronously). It will be called with the arguments (state, props, context). These values can be different from this because the function may be called after `receiveProps` now called `componentWillReceiveProps` but before `shouldComponentUpdate`, and this new state, props, and context will not yet be assigned to this.
  
 The React component inherits from React.Component, and setState is the React.Component method, so setState belongs to its prototype method for the component.
 ```typescript
@@ -47,9 +47,15 @@ enqueueSetState: function(
     warnNoop(publicInstance, 'setState');
   }
 ```
-TODO
-# What are recieveProps and shouldComponentUpdate?
 
+# What are componentWillReceiveProps and shouldComponentUpdate?
+- `shouldComponentUpdate`: this method allows your Component to exit the Update life cycle if there is no reason to apply a new render.
+- `componentWillReceiveProps`: is invoked before a mounted component receives new props.
 # Why does enqueueSetState receive many arguments but only uses one on its body? What happens with the callback?
+The callback is used in the updater. We initialize the default updater but the real one gets injected by the renderer in the definition of `React.Component`. The callback is called after state is updated.
 
+```javascript
+this.updater = updater || ReactNoopUpdateQueue;
+```
 # What does warnNoop do?
+Essentialy, a Noop does nothing (short for no operation). In this case, the function gives an error/warning if that componenent you are trying to render is not yet mounted.
